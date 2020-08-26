@@ -1,0 +1,10 @@
+/Users/chris/Desktop/gomoku/bin/Debug/netcoreapp3.1/gomoku.deps.json
+/Users/chris/Desktop/gomoku/bin/Debug/netcoreapp3.1/gomoku.runtimeconfig.json
+/Users/chris/Desktop/gomoku/bin/Debug/netcoreapp3.1/gomoku.runtimeconfig.dev.json
+/Users/chris/Desktop/gomoku/bin/Debug/netcoreapp3.1/gomoku.dll
+/Users/chris/Desktop/gomoku/bin/Debug/netcoreapp3.1/gomoku.pdb
+/Users/chris/Desktop/gomoku/obj/Debug/netcoreapp3.1/gomoku.csprojAssemblyReference.cache
+/Users/chris/Desktop/gomoku/obj/Debug/netcoreapp3.1/gomoku.AssemblyInfoInputs.cache
+/Users/chris/Desktop/gomoku/obj/Debug/netcoreapp3.1/gomoku.AssemblyInfo.cs
+/Users/chris/Desktop/gomoku/obj/Debug/netcoreapp3.1/gomoku.dll
+/Users/chris/Desktop/gomoku/obj/Debug/netcoreapp3.1/gomoku.pdb
