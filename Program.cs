@@ -7,9 +7,7 @@ namespace gomoku
     {
         static void Main(string[] args)
         {
-
-            /*
-            Console.Write("Please choose game mode: human vs human(input 1) or computer vs human(input 2):");
+            Console.Write("Please choose game mode: human vs human(input 1) or computer vs human(input 2) >> ");
             int mode = Convert.ToInt32(Console.ReadLine());
             if (mode == 1) {
                 Console.WriteLine("The player has chosed human vs human mode.");
@@ -24,35 +22,16 @@ namespace gomoku
                 gomoku.DrawBoard();
             } else if (mode == 2) {
                 Console.WriteLine("The player has chosed computer vs human mode.");
-                Console.Write("Please choose game difficulty: easy(input 1) or hard(input 2):");
-                int difficulty = Convert.ToInt32(Console.ReadLine());
-                if (difficulty == 1)
-                {
-                    Console.WriteLine("The player has chosed easy difficulty.");
-                    //Current testing place
-
-                }
-                else if (mode == 2)
-                {
-                    Console.WriteLine("The player has chosed hard difficulty.");
-                    //Current testing place
-
-                }
+                Move[] moves = new Move[225];
+                moves[0] = new Move(0, 0, "test", 1);
+                AIMove[] aimoves = new AIMove[225];
+                aimoves[0] = new AIMove(0, 0, 2);
+                Player player = new Player(1, moves);
+                AIPlayer aiplayer = new AIPlayer(2, aimoves);
+                AIBoard aigomoku = new AIBoard(player, aiplayer);
+                aigomoku.InitBoard();
+                aigomoku.DrawBoard();
             }
-            /*
-            black: ○
-            white: ●
-            */
-            
-            Move[] moves = new Move[225];
-            moves[0] = new Move(0, 0, "test", 1);
-            AIMove[] aimoves = new AIMove[225];
-            aimoves[0] = new AIMove(0, 0, 2);
-            Player player = new Player(1, moves);
-            AIPlayer aiplayer = new AIPlayer(2, aimoves);
-            AIBoard aigomoku = new AIBoard(player, aiplayer);
-            aigomoku.InitBoard();
-            aigomoku.DrawBoard();
         }
     }
 }

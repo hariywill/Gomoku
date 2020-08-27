@@ -210,9 +210,7 @@ namespace gomoku
             }
             if (!CurrentPlayer)
             {
-                Console.WriteLine("Player1 redo");
-                Console.WriteLine(player.Moves[count - 1].Row);
-                Console.WriteLine(player.Moves[count - 1].Column);
+                Console.WriteLine("Player1 redo succeed.");
                 idx[player.Moves[count].Row - 1, player.Moves[count].Column - 1] = 0;
                 board[player.Moves[count].Row - 1, player.Moves[count].Column - 1] = "+";
                 idx[player.Moves[count - 1].Row - 1, player.Moves[count - 1].Column - 1] = 0;
@@ -222,21 +220,6 @@ namespace gomoku
                 player.Moves[count] = new Move(0, 0, "test", 1);
                 aiplayer.AIMoves[count - 1] = new AIMove(0, 0, 2);
                 player.Moves[count - 1] = new Move(0, 0, "test", 1);
-            }
-            else
-            {
-                Console.WriteLine("aiplayer redo");
-                Console.WriteLine(aiplayer.AIMoves[count - 1].Row);
-                Console.WriteLine(aiplayer.AIMoves[count - 1].Column);
-                idx[aiplayer.AIMoves[count].Row - 1, aiplayer.AIMoves[count].Column - 1] = 0;
-                board[aiplayer.AIMoves[count].Row - 1, aiplayer.AIMoves[count].Column - 1] = "+";
-                idx[aiplayer.AIMoves[count - 1].Row - 1, aiplayer.AIMoves[count - 1].Column - 1] = 0;
-                board[aiplayer.AIMoves[count - 1].Row - 1, aiplayer.AIMoves[count - 1].Column - 1] = "+";
-                idx[player.Moves[count - 1].Row - 1, player.Moves[count - 1].Column - 1] = 0;
-                board[player.Moves[count - 1].Row - 1, player.Moves[count - 1].Column - 1] = "+";
-                aiplayer.AIMoves[count] = new AIMove(0, 0, 2);
-                player.Moves[count - 1] = new Move(0, 0, "test", 1);
-                aiplayer.AIMoves[count - 1] = new AIMove(0, 0, 2);
             }
             count--;
             CurrentPlayer = !CurrentPlayer;
@@ -278,13 +261,11 @@ namespace gomoku
                     //(WIN_PIECE - 1) = 4, which means needs compare for 4 times to get 5 same pieces in a line.
                     if (count == (WIN_PIECE - 1))
                     {
-                        Console.WriteLine("Compare count: " + count);
                         return !HasFive;
                     }
 
                 }
             }
-            Console.WriteLine(count);
             return HasFive;
         }
 
@@ -299,9 +280,6 @@ namespace gomoku
                     if ((array[i, j] == array[i + 1, j]) && (array[i, j] == target))
                     {
                         count++;
-                        Console.WriteLine("array[i, j]" + array[i, j]);
-                        Console.WriteLine("array[i, j]" + array[i, j + 1]);
-                        Console.WriteLine("count: " + count);
                     }
                     if (count == (WIN_PIECE - 1))
                     {
@@ -309,7 +287,6 @@ namespace gomoku
                     }
                 }
             }
-            Console.WriteLine(count);
             return HasFive;
         }
 
@@ -327,7 +304,6 @@ namespace gomoku
                     }
                     if (count == (WIN_PIECE - 1))
                     {
-                        Console.WriteLine(count);
                         return !HasFive;
                     }
                 }
@@ -354,7 +330,6 @@ namespace gomoku
                     }
                 }
             }
-            Console.WriteLine(count);
             return HasFive;
         }
 
@@ -428,7 +403,6 @@ namespace gomoku
                         {
                             if (TempString.Contains(str))
                             {
-                                Console.WriteLine("i: " + i);
                                 Position[0] = i;
                                 Position[1] = TempString.IndexOf(str) + str.IndexOf("0");
                                 Position[2] = Position[1];
@@ -453,10 +427,8 @@ namespace gomoku
                         {
                             if (TempString.Contains(str))
                             {
-                                Console.WriteLine("i: " + i);
                                 Position[0] = i;
                                 Position[1] = TempString.IndexOf(str) + str.IndexOf("0");
-                                Console.WriteLine("AI move: " + Position[0] + Position[1]);
                                 Position[2] = Position[1];
                                 if (Position[2] > 0)
                                 {
