@@ -21,12 +21,6 @@ namespace gomoku
         //x,y为坐标,q为胜利类型,id来判定已经经历过的点，每种胜利切换时也应该重置count
         int WinnerID;
 
-
-
-        string[] FourStrings = new[] { "22220", "22202", "22022", "20222", "02222" };
-        string[] StraightThreeStrings = new[] { "2220", "2202", "2022", "0222" };
-
-        string[] StraightTwoStrings = new[] { "220", "022", "202" };
         string[] OneStrings = new[] { "20", "02" };
 
 
@@ -391,56 +385,7 @@ namespace gomoku
                         TempString = "";
                     }
                     break;
-                case 3:
-                    //Test lower right
-                    for (int i = 0; i < BOARD_SIZE - (WIN_PIECE - 1); i++)
-                    {
-                        for (int j = 0; j < BOARD_SIZE - (WIN_PIECE - 1); j++)
-                        {
-                            TempString += idx[i, j];
-                        }
-                        foreach (string str in strings)
-                        {
-                            if (TempString.Contains(str))
-                            {
-                                Position[0] = i;
-                                Position[1] = TempString.IndexOf(str) + str.IndexOf("0");
-                                Position[2] = Position[1];
-                                if (Position[2] > 0)
-                                {
-                                    return Position;
-                                }
-                            }
-                        }
-                        TempString = "";
-                    }
-                    break;
-                case 4:
-                    //Test lower left
-                    for (int i = 0; i < BOARD_SIZE - (WIN_PIECE - 1); i++)
-                    {
-                        for (int j = (WIN_PIECE - 1); j < BOARD_SIZE; j++)
-                        {
-                            TempString += idx[i, j];
-                        }
-                        foreach (string str in strings)
-                        {
-                            if (TempString.Contains(str))
-                            {
-                                Position[0] = i;
-                                Position[1] = TempString.IndexOf(str) + str.IndexOf("0");
-                                Position[2] = Position[1];
-                                if (Position[2] > 0)
-                                {
-                                    return Position;
-                                }
-                            }
-                        }
-                        TempString = "";
-                    }
-                    break;
             }      
-            
             return Position;
         }
 
@@ -553,17 +498,6 @@ namespace gomoku
                     }
                     break;
             }
-            /*
-            Console.WriteLine("AI player random move: row "+(AIPlayer.AIMoves[count].Row - 1));
-            Console.WriteLine("col "+(AIPlayer.AIMoves[count].Column - 1));
-            idx[AIPlayer.AIMoves[count].Row - 1, AIPlayer.AIMoves[count].Column - 1] = 2;
-            Console.WriteLine("-------------------");
-            Console.WriteLine("Index was outside the bounds of the array: board[{0}, {1}]", AIPlayer.AIMoves[count].Row - 1, AIPlayer.AIMoves[count].Column - 1);
-            Console.WriteLine("-------------------");
-            board[AIPlayer.AIMoves[count].Row - 1, AIPlayer.AIMoves[count].Column - 1] = "●";
-            count++;
-            UpdateMove();
-            */
         }
 
         public void AIUpdateMove(AIMove move) 
@@ -581,50 +515,8 @@ namespace gomoku
                 RandomMove();
                 return;
             }
-            /*
-            int[] FourPositions = new int[3];
-            FourPositions = TestNumberInLine(FourStrings);
-            int[] ThreePositions = new int[3];
-            ThreePositions = TestNumberInLine(StraightThreeStrings);
-            int[] TwoPositions = new int[3];
-            TwoPositions = TestNumberInLine(StraightTwoStrings);
-            */
             int[] OnePositions = new int [3];
             OnePositions = TestNumberInLine(OneStrings);
-            /*
-            //"22220", "22202", "22022", "20222", "02222"
-            if (count >= 5 && FourPositions[2] > 0)
-            {
-                AIPlayer.AIMoves[count] = new AIMove(FourPositions[0], FourPositions[1], 2);
-                idx[AIPlayer.AIMoves[count].Row - 1, AIPlayer.AIMoves[count].Column - 1] = 2;
-                board[AIPlayer.AIMoves[count].Row - 1, AIPlayer.AIMoves[count].Column - 1] = "●";
-                count++;
-                UpdateMove();
-                return;
-
-            }
-            //"2220", "2202", "2022", "0222"
-            if (count >= 4 && ThreePositions[2] > 0)
-            {
-                AIPlayer.AIMoves[count] = new AIMove(ThreePositions[0], ThreePositions[1], 2);
-                idx[AIPlayer.AIMoves[count].Row - 1, AIPlayer.AIMoves[count].Column - 1] = 2;
-                board[AIPlayer.AIMoves[count].Row - 1, AIPlayer.AIMoves[count].Column - 1] = "●";
-                count++;
-                UpdateMove();
-                return;
-            }
-            //"220", "022", "202" 
-            if (count >= 3 && TwoPositions[2] > 0)
-            {
-                AIPlayer.AIMoves[count] = new AIMove(TwoPositions[0], TwoPositions[1], 2);
-                idx[AIPlayer.AIMoves[count].Row - 1, AIPlayer.AIMoves[count].Column - 1] = 2;
-                board[AIPlayer.AIMoves[count].Row - 1, AIPlayer.AIMoves[count].Column - 1] = "●";
-                count++;
-                UpdateMove();
-                return;
-            }
-            */
-            //"20", "02"
             if (count >= 2 && OnePositions[2] > 0)
             {
                 if (CheckEmpty(OnePositions[0] - 1, OnePositions[1] - 1))
@@ -640,53 +532,7 @@ namespace gomoku
                 {
                     RandomMove();
                 }
-            }
-            
-        }
-
-
-        /*
-        public string[] PointDirectionCheck(int row, int col, string[,] matrix)
-        {
-            string[] results = new string[4];
-            int a = row;
-            int b = col;
-            //Array from 4 directions
-            //Horizon direction
-            string[] horizon = new string[BOARD_SIZE];
-            for (var i = 0; i < 15; i++)
-                horizon[i] = matrix[row, i];
-            //Vertical direction
-            string[] vertical = new string[BOARD_SIZE];
-            for (var i = 0; i < 15; i++)
-                vertical[i] = matrix[i, col];
-            //Right top
-            string[] rightTop = new string[BOARD_SIZE];
-            while (a < 14 && b > 0) { a++; b--; };
-            for (var i = 0; a >= 0 && b < 15; i++)
-                rightTop[i] = matrix[a--, b++];
-            //Right down
-            a = row;
-            b = col;
-            string[] rightDown = new string[BOARD_SIZE];
-            while (a > 0 && b > 0) { a--; b--; };
-            for (var i = 0; a < 15 && b < 15; i++)
-                rightDown[i] = matrix[a++, b++];
-
-            string horizonCheck = 'b' + string.Join("", horizon) + 'b';
-            string verticalCheck = 'b' + string.Join("", vertical) + 'b';
-            string rightTopCheck = 'b' + string.Join("", rightTop) + 'b';
-            string rightDownCheck = 'b' + string.Join("", rightDown) + 'b';
-            
-            results[0] = horizonCheck;
-            results[1] = verticalCheck;
-            results[2] = rightTopCheck;
-            results[3] = rightDownCheck;
-
-            return results;
-        }
-        */
-        
-        
+            }   
+        }        
     }
 }
