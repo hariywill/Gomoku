@@ -78,8 +78,17 @@ namespace gomoku
             Console.WriteLine();
             Console.WriteLine();
             //Problem: Player2 can't quit && redo not working. Update: problem fixed
-            while ((player1.Moves[count].GetUserCommand()!="q") && (player2.Moves[count].GetUserCommand()!="q"))
-            {
+            while (!(player1.Moves[count].GetUserCommand()=="q"))
+            {   
+                if ((player1.Moves[count].GetUserCommand() == "r")) Redo();
+                //Becasue the count will plus one after before update move, therefore it need to minus 1
+                if (count >= 1) {
+                    if (player2.Moves[count - 1].GetUserCommand() == "q") break;
+                    if (player2.Moves[count - 1].GetUserCommand() == "r") {
+                        CurrentPlayer = true;
+                        Redo();
+                    }
+                }
                 int num;
                 if (CurrentPlayer) {
                     num = 1;
@@ -88,10 +97,7 @@ namespace gomoku
                     num = 2;
                 }
                 Console.WriteLine("Round:" + (count + 1) + " Player " + num + "\'s move.");
-                if ((player1.Moves[count].GetUserCommand() == "r") || (player2.Moves[count].GetUserCommand() == "r")) {
-                    Redo();
-
-                }
+                
                 if (CurrentPlayer)
                 {
                     PlacePiece(player1.Moves[count]);
@@ -101,6 +107,8 @@ namespace gomoku
                 {
                     PlacePiece(player2.Moves[count]);
                     WinnerID = player2.ID;
+                    count++;
+                    UpdateMove();
                 }
                 Console.WriteLine("                               1  1  1  1  1  1  1");
                 Console.WriteLine("    1  2  3  4  5  6  7  8  9  0  1  2  3  4  5  6");
@@ -167,8 +175,6 @@ namespace gomoku
                     idx[move.Row-1, move.Column-1] = 2;
                     board[move.Row-1, move.Column-1] = "●";
                     CurrentPlayer = !CurrentPlayer;
-                    count++;
-                    UpdateMove();
                 }
             }
             else
@@ -194,9 +200,7 @@ namespace gomoku
             }
             if (!CurrentPlayer)
             {
-                Console.WriteLine("Player 1 redo.");
-                Console.WriteLine(player1.Moves[count - 1].Row);
-                Console.WriteLine(player1.Moves[count-1].Column);
+                Console.WriteLine("Player 1 redo succeed.");
                 idx[player1.Moves[count].Row - 1, player1.Moves[count].Column - 1] = 0;
                 board[player1.Moves[count].Row - 1, player1.Moves[count].Column - 1] = "+";
                 idx[player1.Moves[count - 1].Row - 1, player1.Moves[count - 1].Column - 1] = 0;
@@ -206,16 +210,13 @@ namespace gomoku
                 player1.Moves[count] = new Move(0, 0, "test", 1);
                 player2.Moves[count - 1] = new Move(0, 0, "test", 2);
                 player1.Moves[count - 1] = new Move(0, 0, "test", 1);
-            }
-            else
-            {
-                Console.WriteLine("Player 2 redo."); 
-                Console.WriteLine(player2.Moves[count-1].Row);
-                Console.WriteLine(player2.Moves[count-1].Column);
-                idx[player2.Moves[count].Row - 1, player2.Moves[count].Column - 1] = 0;
-                board[player2.Moves[count].Row - 1, player2.Moves[count].Column - 1] = "+";
+            } else {
+                Console.WriteLine("Player 2 redo  succeed.");
+                //Becasue the count will plus one after before update move, therefore it need to minus 1 and minus 2
                 idx[player2.Moves[count - 1].Row - 1, player2.Moves[count - 1].Column - 1] = 0;
                 board[player2.Moves[count - 1].Row - 1, player2.Moves[count - 1].Column - 1] = "+";
+                idx[player2.Moves[count - 2].Row - 1, player2.Moves[count - 2].Column - 1] = 0;
+                board[player2.Moves[count - 2].Row - 1, player2.Moves[count - 2].Column - 1] = "+";
                 idx[player1.Moves[count - 1].Row - 1, player1.Moves[count - 1].Column - 1] = 0;
                 board[player1.Moves[count - 1].Row - 1, player1.Moves[count - 1].Column - 1] = "+";
                 player2.Moves[count] = new Move(0, 0, "test", 2);
@@ -268,7 +269,6 @@ namespace gomoku
                     
                 }
             }
-            Console.WriteLine(count);
             return HasFive;
         }
 
@@ -289,7 +289,6 @@ namespace gomoku
                     }
                 }
             }
-            Console.WriteLine(count);
             return HasFive;
         }   
 
@@ -306,7 +305,6 @@ namespace gomoku
                     }
                     if (count == (WIN_PIECE - 1))
                     {
-                        Console.WriteLine(count);
                         return !HasFive;
                     }
                 }
@@ -333,7 +331,6 @@ namespace gomoku
                     }
                 }
             }
-            Console.WriteLine(count);
             return HasFive;
         }
     }

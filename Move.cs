@@ -93,7 +93,7 @@ namespace gomoku
         
         public string DisplayMove()
         {
-            return("Player ID: " + PlayerID + "; Position: row " + Row + ", column " + Column);
+            return("Player ID: " + PlayerID + "; Position: row " + Row + ", column " + Column + ", usercommand " + UserCommand);
         }
 
         public string GetUserCommand()
