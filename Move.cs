@@ -80,13 +80,13 @@ namespace gomoku
                 value = Convert.ToInt32(line);
                 if (value<= 0 || value>16) {
                     Console.WriteLine("Please input a number between 1 and 16.");
-                    CheckInputValid(str);
+                    value = CheckInputValid(str);
                 }
             }
             else
             {
                 Console.WriteLine("Please input a number.");
-                CheckInputValid(str);
+                value = CheckInputValid(str);
             }
             return value;
         }

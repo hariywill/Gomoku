@@ -43,7 +43,7 @@ namespace gomoku
             black: ○
             white: ●
             */
-            /*
+            
             Move[] moves = new Move[225];
             moves[0] = new Move(0, 0, "test", 1);
             AIMove[] aimoves = new AIMove[225];
@@ -53,19 +53,6 @@ namespace gomoku
             AIBoard aigomoku = new AIBoard(player, aiplayer);
             aigomoku.InitBoard();
             aigomoku.DrawBoard();
-            */
-
-            Move[] moves1 = new Move[225];
-            moves1[0] = new Move(0, 0, "test", 1);
-            Move[] moves2 = new Move[225];
-            moves2[0] = new Move(0, 0, "test", 2);
-            moves2[1] = new Move(0, 0, "test", 2);
-            Player player1 = new Player(1, moves1);
-            Player player2 = new Player(2, moves2);
-            GomokuBoard gomoku = new GomokuBoard(player1, player2);
-            gomoku.InitBoard();
-            gomoku.DrawBoard();
-            
         }
     }
 }

@@ -487,6 +487,10 @@ namespace gomoku
             Position[1] = player.Moves[count].Column;
             Random ran = new Random();
             int RanNum = ran.Next(1, 8);
+            if (Position[0] == 1) RanNum = 7; 
+            if (Position[0] == 16) RanNum = 2;
+            if (Position[1] == 1) RanNum = 5;
+            if (Position[1] == 16) RanNum = 4;
             switch (RanNum)
             {
                 case 1:
@@ -591,7 +595,7 @@ namespace gomoku
         }
 
         public void AIUpdateMove(AIMove move) 
-        {
+        {   
             idx[move.Row - 1, move.Column - 1] = 2;
             board[move.Row - 1, move.Column - 1] = "●";
             count++;
